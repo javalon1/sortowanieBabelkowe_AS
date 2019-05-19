@@ -14,16 +14,21 @@ public class App {
         int counter=0;
 
         for (int j = 0; j < tab.length - 1; j++) {
+            boolean flaga = false;
 
-            for (int i = 0; i < tab.length - 1; i++) { //-1 bo nie mozemy
+            for (int i = 0; i < tab.length -j- 1; i++) { //-1 bo nie mozemy
                 //sie iterowac z ostatnim miejscem w tablicy, bo nie ma
-                //juz kolejnego elementu.
+                //juz kolejnego elementu. -j zeby zmniejszyc liczbe obiegow
                 if (tab[i] > tab[i + 1]) {// zamien miejscami
                     int tmp = tab[i + 1]; //zmienna pomocnicza
                     tab[i + 1] = tab[i];
                     tab[i] = tmp;
                 }
                 counter++;
+            }
+            if (!flaga){
+                break; // to jest optymalizacja, ktora ogranicza liczbe obiegow petli, bo gdy sie juz posortuje,
+                //wczesniej niz przed wszystkimi obiegami petli, zatrzymuje sie petla
             }
         }
         System.out.println(Arrays.toString(tab));
@@ -34,7 +39,7 @@ public class App {
 
     public static void main(String[] args) {
         Random random = new Random();
-        int[] tab = new int[10];
+        int[] tab = new int[20];
         int max = 5000;
         int min = -5000;
         long startTime = System.currentTimeMillis();
